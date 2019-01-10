@@ -22,30 +22,12 @@ class ArticleModel:
                 self.words_appearances_dict[in_word] = 0
                 # print(in_word + ",")
 
-
-
-
     def set_topic_idx(self, topic_idx):
         self.topic_idx = topic_idx
         self.Wti[self.topic_idx] = 1
 
-    def get_Wti(self, idx):
-        return self.Wti[idx]
-
     def set_Wti(self, values):
         self.Wti = values.copy()
-
-    def get_Mnt(self):
-        return self.Mnt
-
-    def get_Ntk(self, idx):
-        return self.words_appearances_dict[idx]
-
-    def get_Ntk_full(self):
-        return self.words_appearances_dict
-
-    def get_zValues(self):
-        return self.zValues
 
     def set_zValues(self, values):
         self.zValues = values.copy()
@@ -55,3 +37,6 @@ class ArticleModel:
 
     def get_real_topics(self):
         return self.real_topics
+
+    def get_zValues(self):
+        return self.zValues

@@ -2,9 +2,6 @@ import sys
 from ClusteringModel import *
 from ArticleModel import *
 
-def create_dict(words):
-    return dict()
-
 
 def get_filtered_words(words_dict):
     return [i for i in words_dict.keys() if int(words_dict[i]) > 3]
@@ -12,11 +9,10 @@ def get_filtered_words(words_dict):
 
 def read_topics():
     topics_filename = "topics.txt"
-    topics_file = open(topics_filename,'r')
+    topics_file = open(topics_filename, 'r')
     topics = [l.split()[0] for l in topics_file.readlines()[0::2]]
     print(topics)
-    return {i:topics[i] for i in range(len(topics))}
-
+    return {i: topics[i] for i in range(len(topics))}
 
 
 def main(args):
@@ -34,10 +30,12 @@ def main(args):
     words_dict = list_to_dictionary(words)
     frequent_words = get_filtered_words(words_dict)
 
-    model = ClusteringModel(article_models, frequent_words)
+    model = ClusteringModel(article_models, frequent_words, words_dict)
     model.init_parameters()
     model.cluster()
-    model.create_confusion_matrix(possible_topics)
+    table = model.create_confusion_matrix(possible_topics)
+    # print_clusters_labels_assignment(table, possible_topics)
+    # print_accuracy(table, model)
 
     print("there are %d articles, and %d different possible topics" % (len(articles), len(possible_topics)))
     print(possible_topics)
